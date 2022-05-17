@@ -6,8 +6,9 @@ import rickyRoute from './rickyRoute.js';
 
 import will from './will.js';
 
-import leslieRoute from './leslieRoute.js';
 import vezRoutes from './vezRoutes.js';
+
+import tristanRoute from './tristanRoutes.js';
 
 import db from '../database/initializeDB.js';
 
@@ -21,8 +22,9 @@ router.use('/ricky', rickyRoute);
 
 router.use('/will', will);
 
-router.use('./leslie', leslieRoute);
 router.use('/vez', vezRoutes);
+
+router.use('/tristan', tristanRoute);
 
 /// /////////////////////////////////
 /// ////Dining Hall Endpoints////////
@@ -111,7 +113,7 @@ router.put('/dining', async (req, res) => {
 router.get('/meals', async (req, res) => {
   try {
     const meals = await db.Meals.findAll();
-    res.json({data: meals})
+    res.json({data: meals});
     //res.json(meals);
   } catch (err) {
     console.error(err);
@@ -259,7 +261,7 @@ const mealMapCustom = `SELECT hall_name,
   meal_name
 FROM
   Meals m
-INNER JOIN Meals_Locations ml 
+INNER JOIN Meals_Locations ml
   ON m.meal_id = ml.meal_id
 INNER JOIN Dining_Hall d
 ON d.hall_id = ml.hall_id;`;
